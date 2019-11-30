@@ -10,7 +10,7 @@ public class AlgafoodApplication {
         SpringApplication.run(AlgafoodApplication.class, args);
 
 
-        System.out.println("TEste");
+        System.out.println("Teste");
     }
 
 }
