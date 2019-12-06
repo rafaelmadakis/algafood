@@ -18,7 +18,7 @@ public class ConsultaRestauranteMain {
                 .run(args);
 
         RestauranteRepository restaurantes = applicationContext.getBean(RestauranteRepository.class);
-        List<Restaurante> todosRestaurantes = restaurantes.todos();
+        List<Restaurante> todosRestaurantes = restaurantes.listar();
 
         for (Restaurante restaurante : todosRestaurantes) {
             System.out.printf("%s - %f\n" , restaurante.getNome(),

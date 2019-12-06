@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RestauranteRepository {
 
-    List<Restaurante> todos();
+    List<Restaurante> listar();
     Restaurante buscar(Long Id);
     Restaurante salvar(Restaurante restaurante);
     void remover(Restaurante restaurante);
