@@ -1,6 +1,9 @@
 package com.algaworks.algafood.domain.model;
 
-import com.algaworks.algafood.Groups;
+import com.algaworks.algafood.core.validation.Groups;
+import com.algaworks.algafood.core.validation.Multiplo;
+import com.algaworks.algafood.core.validation.TaxaFrete;
+import com.algaworks.algafood.core.validation.ValorZeroIncluiDescricao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,11 +13,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@ValorZeroIncluiDescricao(valorField = "taxaFrete", descricaoField = "nome",
+        descricaoObrigatoria = "Frete Grátis")
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -26,16 +33,20 @@ public class Restaurante {
     private Long id;
 
     //@NotEmpty
-    @NotBlank(groups = Groups.CadastroRestaurante.class)
+    @NotBlank
     @Column(nullable = false)
     private String nome;
 
-    @PositiveOrZero(groups = Groups.CadastroRestaurante.class)
+    @NotNull
+    @PositiveOrZero
+   // @TaxaFrete
+//    @Multiplo(numero = 5)
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
     @Valid
-    @NotNull(groups = Groups.CadastroRestaurante.class)
+    @NotNull
+    @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
     //	@JsonIgnoreProperties("hibernateLazyInitializer")
     // @JsonIgnore
     @ManyToOne //(fetch = FetchType.LAZY)

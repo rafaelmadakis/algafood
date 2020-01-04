@@ -16,14 +16,14 @@ public class Problem {
     private String type;
     private String title;
     private String detail;
-    private List<Field> fields;
+    private List<Object> objects;
 
     private String userMessage;
     private LocalDateTime timestamp;
 
     @Getter
     @Builder
-    public static class Field {
+    public static class Object {
 
         private String name;
         private String userMessage;
