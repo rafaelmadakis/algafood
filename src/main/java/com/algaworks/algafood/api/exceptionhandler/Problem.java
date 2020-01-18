@@ -1,4 +1,4 @@
-package com.algaworks.algafood.exceptionhandler;
+package com.algaworks.algafood.api.exceptionhandler;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -29,6 +29,6 @@ public class Problem {
         private String userMessage;
     }
 
-//    private LocalDateTime dataHora;
+//    private OffsetDateTime dataHora;
 //    private String mensagem;
 }
