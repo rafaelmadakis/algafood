@@ -47,9 +47,6 @@ public class Restaurante {
     @Column(name = "taxa_frete", nullable = false)
     private BigDecimal taxaFrete;
 
-//    @Valid
-//    @NotNull
-    @ConvertGroup(from = Default.class, to = Groups.CozinhaId.class)
 
     @ManyToOne //(fetch = FetchType.LAZY)
     @JoinColumn(name = "cozinha_id", nullable = false) //não é necessário(name=""cozinha_id)
