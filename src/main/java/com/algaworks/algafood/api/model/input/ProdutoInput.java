@@ -3,31 +3,26 @@ package com.algaworks.algafood.api.model.input;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 
-//Entrada de dados
 
 @Setter
 @Getter
-public class RestauranteInput {
+public class ProdutoInput {
 
     @NotBlank
     private String nome;
 
+    @NotBlank
+    private String descricao;
+
     @NotNull
     @PositiveOrZero
-    private BigDecimal taxaFrete;
+    private BigDecimal preco;
 
-    @Valid
     @NotNull
-    private CozinhaInput cozinha;
-
-    @Valid
-    @NotNull
-    private EnderecoInput endereco;
+    private Boolean ativo;
 }
-
