@@ -1,4 +1,4 @@
-package com.algaworks.algafood.api.controller.api.assembler;
+package com.algaworks.algafood.api.assembler;
 
 
 import com.algaworks.algafood.api.model.input.EstadoInput;

@@ -1,61 +1,99 @@
 package com.algaworks.algafood.domain.model;
 
+import com.algaworks.algafood.domain.exception.NegocioException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Pedido {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false)
-    private BigDecimal subTotal;
+    private  String codigo;
 
-    @Column(nullable = false)
+    private BigDecimal subtotal;
     private BigDecimal taxaFrete;
-
-    @Column(nullable = false)
-    private  BigDecimal valorTotal;
+    private BigDecimal valorTotal;
 
     @Embedded
     private Endereco enderecoEntrega;
 
-    private StatusPedido status;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status = StatusPedido.CRIADO;
 
     @CreationTimestamp
     private OffsetDateTime dataCriacao;
 
     private OffsetDateTime dataConfirmacao;
     private OffsetDateTime dataCancelamento;
-    private OffsetDateTime dataentrega;
+    private OffsetDateTime dataEntrega;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private FormaPagamento formaPagamento;
 
-
     @ManyToOne
-    @JoinColumn(nullable =  false)
+    @JoinColumn(nullable = false)
     private Restaurante restaurante;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_cliente_id", nullable =  false)
+    @JoinColumn(name = "usuario_cliente_id", nullable = false)
     private Usuario cliente;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
+
+    public void calcularValorTotal() {
+        getItens().forEach(ItemPedido::calcularPrecoTotal);
+
+        this.subtotal = getItens().stream()
+                .map(item -> item.getPrecoTotal())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        this.valorTotal = this.subtotal.add(this.taxaFrete);
+    }
+
+    public  void confirmar() {
+        setStatus(StatusPedido.CONFIRMADO);
+        setDataConfirmacao(OffsetDateTime.now());
+    }
+
+    public  void entregar() {
+        setStatus(StatusPedido.ENTREGUE);
+        setDataEntrega(OffsetDateTime.now());
+    }
+
+    public  void cancelar() {
+        setStatus(StatusPedido.CANCELADO);
+        setDataCancelamento(OffsetDateTime.now());
+    }
+
+    private  void setStatus(StatusPedido novoStatus) {
+       if (getStatus().naoPodeAlteraraPara(novoStatus)){
+           throw  new NegocioException(String.format("Status do pedido %s não pode ser alterado de %s para %s",
+                   getCodigo(), getStatus()
+                           .getDescricao(), novoStatus.getDescricao()));
+       }
+
+       this.status = novoStatus;
+    }
+
+    @PrePersist// antes de inserir uma entidade pedido na BD, executa esse método
+    private void gerarCodigo(){
+        setCodigo(UUID.randomUUID().toString());
+    }
 
 }

@@ -1,7 +1,22 @@
 package com.algaworks.algafood.api.controller;
 
-import com.algaworks.algafood.api.controller.api.assembler.ProdutoInputDisassembler;
-import com.algaworks.algafood.api.controller.api.assembler.ProdutoModelAssembler;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.algaworks.algafood.api.assembler.ProdutoInputDisassembler;
+import com.algaworks.algafood.api.assembler.ProdutoModelAssembler;
 import com.algaworks.algafood.api.model.ProdutoModel;
 import com.algaworks.algafood.api.model.input.ProdutoInput;
 import com.algaworks.algafood.domain.model.Produto;
@@ -9,12 +24,6 @@ import com.algaworks.algafood.domain.model.Restaurante;
 import com.algaworks.algafood.domain.repository.ProdutoRepository;
 import com.algaworks.algafood.domain.service.CadastroProdutoService;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/restaurantes/{restauranteId}/produtos")
@@ -55,7 +64,6 @@ public class RestauranteProdutoController {
     @ResponseStatus(HttpStatus.CREATED)
     public ProdutoModel adicionar(@PathVariable Long restauranteId,
                                   @RequestBody @Valid ProdutoInput produtoInput) {
-
         Restaurante restaurante = cadastroRestaurante.buscarOuFalhar(restauranteId);
 
         Produto produto = produtoInputDisassembler.toDomainObject(produtoInput);
@@ -77,4 +85,5 @@ public class RestauranteProdutoController {
 
         return produtoModelAssembler.toModel(produtoAtual);
     }
+
 }

@@ -1,8 +1,12 @@
 package com.algaworks.algafood.domain.model;
 
-import lombok.Data;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.*;
+import lombok.Data;
 
 @Data
 @Embeddable
@@ -26,4 +30,5 @@ public class Endereco {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "endereco_cidade_id")
     private Cidade cidade;
+
 }

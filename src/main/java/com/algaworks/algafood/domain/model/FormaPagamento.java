@@ -1,13 +1,17 @@
 package com.algaworks.algafood.domain.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
-
-@Entity
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class FormaPagamento {
 
     @EqualsAndHashCode.Include
@@ -16,5 +20,6 @@ public class FormaPagamento {
     private Long id;
 
     @Column(nullable = false)
-    private String Descricao;
+    private String descricao;
+
 }
