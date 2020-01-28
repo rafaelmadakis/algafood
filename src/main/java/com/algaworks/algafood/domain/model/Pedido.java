@@ -91,7 +91,7 @@ public class Pedido {
        this.status = novoStatus;
     }
 
-    @PrePersist// antes de inserir uma entidade pedido na BD, executa esse método
+    @PrePersist// antes de inserir uma entidade pedido no BD, executa esse método
     private void gerarCodigo(){
         setCodigo(UUID.randomUUID().toString());
     }
