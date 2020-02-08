@@ -1,4 +1,4 @@
-package com.algaworks.algafood.infrastructure.repository;
+package com.algaworks.algafood.infrastructure.repository.repository;
 
 import static com.algaworks.algafood.infrastructure.repository.spec.RestauranteSpecs.comFreteGratis;
 import static com.algaworks.algafood.infrastructure.repository.spec.RestauranteSpecs.comNomeSemelhante;
