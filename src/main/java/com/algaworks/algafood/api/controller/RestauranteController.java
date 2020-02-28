@@ -14,12 +14,16 @@ import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import com.algaworks.algafood.domain.service.CadastroRestauranteService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
+
+@CrossOrigin(maxAge = 15)
 @RestController
 @RequestMapping(value = "/restaurantes")
 public class RestauranteController {
@@ -36,17 +40,20 @@ public class RestauranteController {
     @Autowired
     private RestauranteInputDisassembler restauranteInputDisassembler;
 
+
+
     @JsonView(RestauranteView.Resumo.class)
     @GetMapping
-    public List<RestauranteModel> listar() {
+    public List<RestauranteModel>  listar() {
         return restauranteModelAssembler.toCollectionModel(restauranteRepository.findAll());
+
     }
 
-    @JsonView(RestauranteView.ApenasNome.class)
-    @GetMapping(params = "projecao=apenas-nome")
-    public List<RestauranteModel> listarApenasNomes() {
-        return listar();
-    }
+//    @JsonView(RestauranteView.ApenasNome.class)
+//    @GetMapping(params = "projecao=apenas-nome")
+//    public List<RestauranteModel> listarApenasNomes() {
+//        return listar();
+//    }
 
 //	@GetMapping
 //	public MappingJacksonValue listar(@RequestParam(required = false) String projecao) {
