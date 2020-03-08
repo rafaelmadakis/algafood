@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Api(tags = "Restaunrantes")
-public interface RestaunranteControllerOpenApi {
+public interface RestauranteControllerOpenApi {
 
         @ApiOperation(value = "Lista restaurantes", response = RestauranteBasicoModelModelApi.class)
         @ApiImplicitParams({
