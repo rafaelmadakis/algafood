@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
-@Api(tags = "Restaunrantes")
+@Api(tags = "Restaurantes")
 public interface RestauranteControllerOpenApi {
 
         @ApiOperation(value = "Lista restaurantes", response = RestauranteBasicoModelModelApi.class)
