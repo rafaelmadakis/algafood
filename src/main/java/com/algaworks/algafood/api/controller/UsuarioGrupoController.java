@@ -21,6 +21,7 @@ public class UsuarioGrupoController implements UsuarioGrupoControllerOpenApi {
     @Autowired
     private GrupoModelAssembler grupoModelAssembler;
 
+    @Override
     @GetMapping
     public List<GrupoModel> listar(@PathVariable Long usuarioId) {
         Usuario usuario = cadastroUsuario.buscarOuFalhar(usuarioId);
@@ -28,12 +29,14 @@ public class UsuarioGrupoController implements UsuarioGrupoControllerOpenApi {
         return grupoModelAssembler.toCollectionModel(usuario.getGrupos());
     }
 
+    @Override
     @DeleteMapping("/{grupoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void desassociar(@PathVariable Long usuarioId, @PathVariable Long grupoId) {
         cadastroUsuario.desassociarGrupo(usuarioId, grupoId);
     }
 
+    @Override
     @PutMapping("/{grupoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void associar(@PathVariable Long usuarioId, @PathVariable Long grupoId) {

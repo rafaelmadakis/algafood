@@ -13,6 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,19 +37,26 @@ public class CozinhaController implements CozinhaControllerApi {
     @Autowired
     private CozinhaInputDisassembler cozinhaInputDisassembler;
 
+    @Autowired
+    private PagedResourcesAssembler<Cozinha> pagedResourcesAssembler;
+
+    /**
+     * Paginação com hyperMidia(Hatoas)
+     * @param pegeable
+     * @return
+     */
+    @Override
     @GetMapping
-    public Page<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pegeable) {
+    public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pegeable) {
         Page<Cozinha> cozinhasPage = cozinhaRepository.findAll(pegeable);
 
-        List<CozinhaModel> cozinhasModel = cozinhaModelAssembler
-                .toCollectionModel(cozinhasPage.getContent());
+        PagedModel<CozinhaModel> cozinhasPagedModel = pagedResourcesAssembler
+                .toModel(cozinhasPage, cozinhaModelAssembler);
 
-        Page<CozinhaModel> cozinhaModelPage = new PageImpl<>(cozinhasModel
-                ,pegeable, cozinhasPage.getTotalElements());
-
-        return cozinhaModelPage;
+        return cozinhasPagedModel;
     }
 
+    @Override
     @GetMapping("/{cozinhaId}")
     public CozinhaModel buscar(@PathVariable Long cozinhaId) {
         Cozinha cozinha = cadastroCozinha.buscarOuFalhar(cozinhaId);
@@ -55,6 +64,7 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhaModelAssembler.toModel(cozinha);
     }
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CozinhaModel adicionar(@RequestBody @Valid CozinhaInput cozinhaInput) {
@@ -74,6 +84,7 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhaModelAssembler.toModel(cozinhaAtual);
     }
 
+    @Override
     @DeleteMapping("/{cozinhaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long cozinhaId) {
