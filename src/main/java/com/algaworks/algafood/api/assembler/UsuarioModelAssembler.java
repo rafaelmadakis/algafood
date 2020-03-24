@@ -1,17 +1,17 @@
 package com.algaworks.algafood.api.assembler;
 
-import com.algaworks.algafood.api.controller.UsuarioController;
-import com.algaworks.algafood.api.controller.UsuarioGrupoController;
-import com.algaworks.algafood.api.model.UsuarioModel;
-import com.algaworks.algafood.domain.model.Usuario;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import com.algaworks.algafood.api.AlgaLinks;
+import com.algaworks.algafood.api.controller.UsuarioController;
+import com.algaworks.algafood.api.model.UsuarioModel;
+import com.algaworks.algafood.domain.model.Usuario;
 
 @Component
 public class UsuarioModelAssembler
@@ -19,6 +19,9 @@ public class UsuarioModelAssembler
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private AlgaLinks algaLinks;
 
     public UsuarioModelAssembler() {
         super(UsuarioController.class, UsuarioModel.class);
@@ -29,10 +32,9 @@ public class UsuarioModelAssembler
         UsuarioModel usuarioModel = createModelWithId(usuario.getId(), usuario);
         modelMapper.map(usuario, usuarioModel);
 
-        usuarioModel.add(linkTo(UsuarioController.class).withRel("usuarios"));
+        usuarioModel.add(algaLinks.linkToUsuarios("usuarios"));
 
-        usuarioModel.add(linkTo(methodOn(UsuarioGrupoController.class)
-                .listar(usuario.getId())).withRel("grupos-usuario"));
+        usuarioModel.add(algaLinks.linkToGruposUsuario(usuario.getId(), "grupos-usuario"));
 
         return usuarioModel;
     }
@@ -42,11 +44,5 @@ public class UsuarioModelAssembler
         return super.toCollectionModel(entities)
                 .add(linkTo(UsuarioController.class).withSelfRel());
     }
-
-    //    public List<UsuarioModel> toCollectionModel(Collection<Usuario> usuarios) {
-//        return usuarios.stream()
-//                .map(usuario -> toModel(usuario))
-//                .collect(Collectors.toList());
-//    }
 
 }
