@@ -1,28 +1,12 @@
 package com.algaworks.algafood.api;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
-import org.springframework.hateoas.IanaLinkRelations;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.TemplateVariable;
+import com.algaworks.algafood.api.controller.*;
+import org.springframework.hateoas.*;
 import org.springframework.hateoas.TemplateVariable.VariableType;
-import org.springframework.hateoas.TemplateVariables;
-import org.springframework.hateoas.UriTemplate;
 import org.springframework.stereotype.Component;
 
-import com.algaworks.algafood.api.controller.CidadeController;
-import com.algaworks.algafood.api.controller.CozinhaController;
-import com.algaworks.algafood.api.controller.EstadoController;
-import com.algaworks.algafood.api.controller.FluxoPedidoController;
-import com.algaworks.algafood.api.controller.FormaPagamentoController;
-import com.algaworks.algafood.api.controller.PedidoController;
-import com.algaworks.algafood.api.controller.RestauranteController;
-import com.algaworks.algafood.api.controller.RestauranteFormaPagamentoController;
-import com.algaworks.algafood.api.controller.RestauranteProdutoController;
-import com.algaworks.algafood.api.controller.RestauranteUsuarioResponsavelController;
-import com.algaworks.algafood.api.controller.UsuarioController;
-import com.algaworks.algafood.api.controller.UsuarioGrupoController;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class AlgaLinks {
@@ -86,6 +70,14 @@ public class AlgaLinks {
     public Link linkToRestauranteFormasPagamento(Long restauranteId, String rel) {
         return linkTo(methodOn(RestauranteFormaPagamentoController.class)
                 .listar(restauranteId)).withRel(rel);
+    }
+
+    public Link linkToRestauranteFormaPagamentoDesassociacao(Long restauranteId,
+                                               Long formaPagamentoId, String rel ){
+
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(restauranteId, formaPagamentoId))
+                .withRel(rel);
+
     }
 
     public Link linkToRestauranteFormasPagamento(Long restauranteId) {

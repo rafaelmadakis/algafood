@@ -1,6 +1,5 @@
 package com.algaworks.algafood.api.apenapi.model;
 
-import com.algaworks.algafood.api.model.CozinhaModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;

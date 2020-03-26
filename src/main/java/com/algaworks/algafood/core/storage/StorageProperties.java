@@ -1,7 +1,6 @@
 package com.algaworks.algafood.core.storage;
 
 
-import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import lombok.Getter;
 import lombok.Setter;

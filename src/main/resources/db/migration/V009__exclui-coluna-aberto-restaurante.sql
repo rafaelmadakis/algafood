@@ -1,1 +1,0 @@
-ALTER TABLE restaurante DROP COLUMN aberto;

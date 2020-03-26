@@ -2,9 +2,9 @@ package com.algaworks.algafood.core.springfox;
 
 
 import com.algaworks.algafood.api.apenapi.model.CozinhasModelOpenApi;
+import com.algaworks.algafood.api.apenapi.model.PageableModelOpenApi;
 import com.algaworks.algafood.api.apenapi.model.PedidosResumoModelOpenApi;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.apenapi.model.PageableModelOpenApi;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.fasterxml.classmate.TypeResolver;
@@ -20,7 +20,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
-import springfox.documentation.builders.*;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;

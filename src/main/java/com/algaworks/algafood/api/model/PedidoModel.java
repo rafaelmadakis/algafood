@@ -1,14 +1,14 @@
 package com.algaworks.algafood.api.model;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.List;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
+
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 
 @Relation(collectionRelation = "pedidos")

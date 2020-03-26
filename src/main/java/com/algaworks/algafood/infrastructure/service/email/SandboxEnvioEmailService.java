@@ -1,13 +1,12 @@
 package com.algaworks.algafood.infrastructure.service.email;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
+import com.algaworks.algafood.core.email.EmailProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
-
-import com.algaworks.algafood.core.email.EmailProperties;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class SandboxEnvioEmailService extends SmtpEnvioEmailService {

@@ -1,13 +1,7 @@
 package com.algaworks.algafood.api.model;
 
-import com.algaworks.algafood.domain.model.Cidade;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Setter
 @Getter
