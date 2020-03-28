@@ -1,6 +1,7 @@
 package com.algaworks.algafood.api;
 
 import com.algaworks.algafood.api.controller.*;
+import com.algaworks.algafood.api.model.ProdutoModel;
 import org.springframework.hateoas.*;
 import org.springframework.hateoas.TemplateVariable.VariableType;
 import org.springframework.stereotype.Component;
@@ -75,9 +76,30 @@ public class AlgaLinks {
     public Link linkToRestauranteFormaPagamentoDesassociacao(Long restauranteId,
                                                Long formaPagamentoId, String rel ){
 
-        return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(restauranteId, formaPagamentoId))
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).desassociar(restauranteId
+                , formaPagamentoId))
                 .withRel(rel);
 
+    }
+
+    public Link linkToRestauranteFormaPagamentoAssociacao(Long restauranteId, String rel ){
+
+        return linkTo(methodOn(RestauranteFormaPagamentoController.class).associar(restauranteId
+                ,null))
+                .withRel(rel);
+
+    }
+
+    public Link linkToRestauranteResponsavelDesassociacao(
+            Long restauranteId, Long usuarioId, String rel) {
+
+        return linkTo(methodOn(RestauranteUsuarioResponsavelController.class)
+                .desassociar(restauranteId, usuarioId)).withRel(rel);
+    }
+
+    public Link linkToRestauranteResponsavelAssociacao(Long restauranteId, String rel){
+        return linkTo(methodOn(RestauranteUsuarioResponsavelController.class)
+        .associar(restauranteId, null)).withRel(rel);
     }
 
     public Link linkToRestauranteFormasPagamento(Long restauranteId) {
@@ -216,5 +238,15 @@ public class AlgaLinks {
     public Link linkToCozinha(Long cozinhaId) {
         return linkToCozinha(cozinhaId, IanaLinkRelations.SELF.value());
     }
+
+    public Link linkToProdutos(Long restauranteId, String rel) {
+        return linkTo(methodOn(RestauranteProdutoController.class)
+                .listar(restauranteId, null)).withRel(rel);
+    }
+
+    public Link linkToProdutos(Long restauranteId) {
+        return linkToProdutos(restauranteId, IanaLinkRelations.SELF.value());
+    }
+
 
 }
