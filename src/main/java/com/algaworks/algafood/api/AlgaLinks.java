@@ -106,6 +106,19 @@ public class AlgaLinks {
         return linkToRestauranteFormasPagamento(restauranteId, IanaLinkRelations.SELF.value());
     }
 
+    public Link linkToGrupos(String rel){
+        return linkTo(GrupoController.class).withRel(rel);
+    }
+
+    public Link linkToGrupos() {
+        return linkToGrupos(IanaLinkRelations.SELF.value());
+    }
+
+    public Link linkToGrupoPermissoes(Long grupoId, String rel) {
+        return linkTo(methodOn(GrupoPermissaoController.class)
+        .listar(grupoId)).withRel(rel);
+    }
+
     public Link linkToFormasPagamento(String rel) {
         return linkTo(FormaPagamentoController.class).withRel(rel);
     }

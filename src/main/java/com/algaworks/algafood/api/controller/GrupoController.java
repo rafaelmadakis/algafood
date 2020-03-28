@@ -9,6 +9,7 @@ import com.algaworks.algafood.domain.model.Grupo;
 import com.algaworks.algafood.domain.repository.GrupoRepository;
 import com.algaworks.algafood.domain.service.CadastroGrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +33,15 @@ public class GrupoController implements GrupoControllerOpenApi {
     @Autowired
     private GrupoInputDisassembler grupoInputDisassembler;
 
+    @Override
     @GetMapping
-    public List<GrupoModel> listar() {
+    public CollectionModel<GrupoModel> listar() {
         List<Grupo> todosGrupos = grupoRepository.findAll();
 
         return grupoModelAssembler.toCollectionModel(todosGrupos);
     }
 
+    @Override
     @GetMapping("/{grupoId}")
     public GrupoModel buscar(@PathVariable Long grupoId) {
         Grupo grupo = cadastroGrupo.buscarOuFalhar(grupoId);
@@ -46,6 +49,7 @@ public class GrupoController implements GrupoControllerOpenApi {
         return grupoModelAssembler.toModel(grupo);
     }
 
+    @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public GrupoModel adicionar(@RequestBody @Valid GrupoInput grupoInput) {
@@ -56,6 +60,7 @@ public class GrupoController implements GrupoControllerOpenApi {
         return grupoModelAssembler.toModel(grupo);
     }
 
+    @Override
     @PutMapping("/{grupoId}")
     public GrupoModel atualizar(@PathVariable Long grupoId,
                                 @RequestBody @Valid GrupoInput grupoInput) {
