@@ -34,6 +34,33 @@ public class AlgaLinks {
                 PAGINACAO_VARIABLES.concat(filtroVariables)), rel);
     }
 
+    public Link linkToEstatisticas(String rel) {
+        return linkTo(EstatisticasController.class).withRel(rel);
+    }
+
+    public Link linkToEstatisticasVendasDiarias(String rel) {
+        TemplateVariables filtroVariables = new TemplateVariables(
+                new TemplateVariable("restauranteId", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoInicio", VariableType.REQUEST_PARAM),
+                new TemplateVariable("dataCriacaoFim", VariableType.REQUEST_PARAM),
+                new TemplateVariable("timeOffset", VariableType.REQUEST_PARAM));
+
+        String pedidosUrl = linkTo(methodOn(EstatisticasController.class)
+                .consultarVendasDiarias(null, null)).toUri().toString();
+
+        return new Link(UriTemplate.of(pedidosUrl, filtroVariables), rel);
+    }
+
+    public Link linkToUsuarioGrupoAssociacao(Long usuarioId, String rel) {
+        return linkTo(methodOn(UsuarioGrupoController.class)
+                .associar(usuarioId, null)).withRel(rel);
+    }
+
+    public Link linkToUsuarioGrupoDesassociacao(Long usuarioId, Long grupoId, String rel) {
+        return linkTo(methodOn(UsuarioGrupoController.class)
+                .desassociar(usuarioId, grupoId)).withRel(rel);
+    }
+
     public Link linkToPermissoes(String rel){
         return linkTo(PermissaoController.class).withRel(rel);
     }
