@@ -1,14 +1,13 @@
 package com.algaworks.algafood.core.springfox;
 
 
-import com.algaworks.algafood.api.apenapi.model.CozinhasModelOpenApi;
-import com.algaworks.algafood.api.apenapi.model.LinksModelOpenApi;
-import com.algaworks.algafood.api.apenapi.model.PageableModelOpenApi;
-import com.algaworks.algafood.api.apenapi.model.PedidosResumoModelOpenApi;
+import com.algaworks.algafood.api.apenapi.model.*;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
+import com.algaworks.algafood.api.model.CidadeModel;
 import com.algaworks.algafood.api.model.CozinhaModel;
 import com.algaworks.algafood.api.model.PedidoResumoModel;
 import com.fasterxml.classmate.TypeResolver;
+import freemarker.ext.beans.CollectionModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -76,6 +75,9 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(Page.class, PedidoResumoModel.class),
                         PedidosResumoModelOpenApi.class))
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, CidadeModel.class),
+                        CidadesModelOpenApi.class))
                 .apiInfo(apiInfo())
                 .tags(new Tag("Cidades", "Gerencia as Cidades"),
                         new Tag("Grupos", "Gerencia os grupos de usuários"),
