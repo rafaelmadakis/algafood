@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 public class CozinhasModelOpenApi  {
 
-    private CozinhasModelOpenApi.CozinhasEmbeddedModelOpenApi _embedded;
+    private CozinhasEmbeddedModelOpenApi _embedded;
     private Links _links;
     private PageModelOpenApi page;
 
