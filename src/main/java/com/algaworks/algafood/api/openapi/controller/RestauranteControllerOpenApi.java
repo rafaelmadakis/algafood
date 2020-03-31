@@ -10,6 +10,7 @@ import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -26,15 +27,16 @@ public interface RestauranteControllerOpenApi {
         @GetMapping
          CollectionModel<RestauranteBasicoModel> listar();
 
+        @ApiIgnore
         @ApiOperation(value = "Lista restaurantes", hidden = true)
-        public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes();
+         CollectionModel<RestauranteApenasNomeModel> listarApenasNomes();
 
         @ApiOperation("Buscar um restaurante por ID")
         @ApiResponses({
                 @ApiResponse(code = 400, message = "ID do restaurante invpalido", response = Problem.class),
                 @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
         })
-        public RestauranteModel buscar(
+         RestauranteModel buscar(
                 @ApiParam(value = "ID de um restaurante", example = "1", required = true)
                 Long restauranteId);
 
@@ -42,7 +44,7 @@ public interface RestauranteControllerOpenApi {
         @ApiResponses({
                 @ApiResponse(code = 201, message = "Restaurante cadastrado")
         })
-        public RestauranteModel adicionar(
+         RestauranteModel adicionar(
                 @ApiParam(name = "corpo", value = "Representação de um novo restaurante", required = true)
                 RestauranteInput restauranteInput);
 
@@ -52,7 +54,7 @@ public interface RestauranteControllerOpenApi {
                 @ApiResponse(code = 200, message = "Restaurante atualizado"),
                 @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
         })
-        public RestauranteModel atualizar(
+         RestauranteModel atualizar(
                 @ApiParam(value = "ID de um retaurante", example = "1", required = true)
                 Long restauranteId,
 
@@ -66,7 +68,7 @@ public interface RestauranteControllerOpenApi {
                 @ApiResponse(code = 204, message = "Restaurante ativado com sucesso"),
                 @ApiResponse(code = 404, message = "Restaurante não encontrado", response = Problem.class)
         })
-        public ResponseEntity<Void> ativar(
+         ResponseEntity<Void> ativar(
                 @ApiParam(value = "ID de um restaurante", example = "1", required = true)
                 Long restauranteId);
 
