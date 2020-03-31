@@ -72,7 +72,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         CozinhasModelOpenApi.class))
 
                 .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(Page.class, PedidoResumoModel.class),
+                        typeResolver.resolve(PagedModel.class, PedidoResumoModel.class),
                         PedidosResumoModelOpenApi.class))
 
                 .alternateTypeRules(AlternateTypeRules.newRule(
@@ -94,6 +94,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, PermissaoModel.class),
                         PermissoesModelOpenApi.class))
+
 
                 .apiInfo(apiInfo())
                 .tags(new Tag("Cidades", "Gerencia as cidades"),
