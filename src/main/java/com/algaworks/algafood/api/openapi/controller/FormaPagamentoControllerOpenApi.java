@@ -1,5 +1,6 @@
 package com.algaworks.algafood.api.openapi.controller;
 
+import com.algaworks.algafood.api.apenapi.model.FormasPagamentoModelOpenApi;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
 import com.algaworks.algafood.api.model.FormaPagamentoModel;
 import com.algaworks.algafood.api.model.input.FormaPagamentoInput;
@@ -12,8 +13,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 public interface FormaPagamentoControllerOpenApi {
 
 
-    @ApiOperation("Lista as formas de pagamento")
-    public ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request);
+    @ApiOperation(value = "Lista as formas de pagamento", response = FormasPagamentoModelOpenApi.class)
+    ResponseEntity<CollectionModel<FormaPagamentoModel>> listar(ServletWebRequest request);
 
 
     @ApiOperation("Busca uma forma de pagamento por ID")
