@@ -24,7 +24,7 @@ public interface RestauranteControllerOpenApi {
         })
 //        @JsonView(RestauranteView.Resumo.class)
         @GetMapping
-        public CollectionModel<RestauranteBasicoModel> listar();
+         CollectionModel<RestauranteBasicoModel> listar();
 
         @ApiOperation(value = "Lista restaurantes", hidden = true)
         public CollectionModel<RestauranteApenasNomeModel> listarApenasNomes();
