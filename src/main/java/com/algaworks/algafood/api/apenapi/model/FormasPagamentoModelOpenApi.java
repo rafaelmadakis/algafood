@@ -12,7 +12,7 @@ import java.util.List;
 public class FormasPagamentoModelOpenApi {
 
     private FormasPagamentoEmbeddedModelOpenApi _embedded;
-    private Links links;
+    private Links _links;
 
     public class FormasPagamentoEmbeddedModelOpenApi {
 

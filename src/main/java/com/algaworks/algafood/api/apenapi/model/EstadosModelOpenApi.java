@@ -12,7 +12,7 @@ import java.util.List;
 public class EstadosModelOpenApi {
 
     private EstadosEmbeddedModelOpenApi _embedded;
-    private Links links;
+    private Links _links;
 
     @ApiModel("EstadosEmbeddedModel")
     @Data
