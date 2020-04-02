@@ -1,14 +1,13 @@
 package com.algaworks.algafood.core.springfox;
 
-import com.algaworks.algafood.api.apenapi.model.*;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.*;
+import com.algaworks.algafood.api.v1.apenapi.*;
+import com.algaworks.algafood.api.v1.model.*;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;

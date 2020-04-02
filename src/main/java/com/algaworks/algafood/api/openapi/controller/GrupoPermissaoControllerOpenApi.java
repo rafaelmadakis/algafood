@@ -1,12 +1,10 @@
 package com.algaworks.algafood.api.openapi.controller;
 
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.PermissaoModel;
+import com.algaworks.algafood.api.v1.model.PermissaoModel;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
 
 @Api(tags = "Grupos")
 public interface GrupoPermissaoControllerOpenApi {

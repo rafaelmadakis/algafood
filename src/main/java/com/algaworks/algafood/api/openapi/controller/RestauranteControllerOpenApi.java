@@ -1,11 +1,11 @@
 package com.algaworks.algafood.api.openapi.controller;
 
-import com.algaworks.algafood.api.apenapi.model.RestauranteBasicoModelApi;
+import com.algaworks.algafood.api.v1.apenapi.RestauranteBasicoModelApi;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.RestauranteApenasNomeModel;
-import com.algaworks.algafood.api.model.RestauranteBasicoModel;
-import com.algaworks.algafood.api.model.RestauranteModel;
-import com.algaworks.algafood.api.model.input.RestauranteInput;
+import com.algaworks.algafood.api.v1.model.RestauranteApenasNomeModel;
+import com.algaworks.algafood.api.v1.model.RestauranteBasicoModel;
+import com.algaworks.algafood.api.v1.model.RestauranteModel;
+import com.algaworks.algafood.api.v1.model.input.RestauranteInput;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;

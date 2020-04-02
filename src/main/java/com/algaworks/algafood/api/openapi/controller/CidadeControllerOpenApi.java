@@ -1,8 +1,8 @@
 package com.algaworks.algafood.api.openapi.controller;
 
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.CidadeModel;
-import com.algaworks.algafood.api.model.input.CidadeInput;
+import com.algaworks.algafood.api.v1.model.CidadeModel;
+import com.algaworks.algafood.api.v1.model.input.CidadeInput;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 

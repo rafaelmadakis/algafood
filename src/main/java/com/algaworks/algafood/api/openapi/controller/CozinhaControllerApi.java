@@ -1,8 +1,8 @@
 package com.algaworks.algafood.api.openapi.controller;
 
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.CozinhaModel;
-import com.algaworks.algafood.api.model.input.CozinhaInput;
+import com.algaworks.algafood.api.v1.model.CozinhaModel;
+import com.algaworks.algafood.api.v1.model.input.CozinhaInput;
 import io.swagger.annotations.*;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.PagedModel;

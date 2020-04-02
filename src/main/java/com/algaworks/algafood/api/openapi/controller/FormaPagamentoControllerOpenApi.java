@@ -1,9 +1,9 @@
 package com.algaworks.algafood.api.openapi.controller;
 
-import com.algaworks.algafood.api.apenapi.model.FormasPagamentoModelOpenApi;
+import com.algaworks.algafood.api.v1.apenapi.FormasPagamentoModelOpenApi;
 import com.algaworks.algafood.api.exceptionhandler.Problem;
-import com.algaworks.algafood.api.model.FormaPagamentoModel;
-import com.algaworks.algafood.api.model.input.FormaPagamentoInput;
+import com.algaworks.algafood.api.v1.model.FormaPagamentoModel;
+import com.algaworks.algafood.api.v1.model.input.FormaPagamentoInput;
 import io.swagger.annotations.*;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
