@@ -49,7 +49,7 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig implements WebMvcConfigurer {
 
-    /*
+
     @Bean
     public Docket apiDocketV1() {
         var typeResolver = new TypeResolver();
@@ -127,7 +127,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         new Tag("Permissões", "Gerencia as permissões"));
     }
 
-     */
+
 
     @Bean
     public Docket apiDocketV2() {
@@ -220,7 +220,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
         );
     }
 
-    /*
+
     private ApiInfo apiInfoV1() {
         return new ApiInfoBuilder()
                 .title("AlgaFood API (Depreciada)")
@@ -232,7 +232,7 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                 .build();
     }
 
-     */
+
 
     private ApiInfo apiInfoV2() {
         return new ApiInfoBuilder()

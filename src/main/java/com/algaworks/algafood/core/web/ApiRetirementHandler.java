@@ -15,11 +15,11 @@ public class ApiRetirementHandler extends HandlerInterceptorAdapter {
 
 
         if (request.getRequestURI().startsWith("/v1/")) {
-//            response.addHeader("X-Algafood-Deprecated", "Essa versão da API está depreciada e deixara de existir a partir de 19/10/2021"
-//             + " Use a versão mais atual da API");
+            response.addHeader("X-Algafood-Deprecated", "Essa versão da API está depreciada e deixara de existir a partir de 19/10/2021"
+             + " Use a versão mais atual da API");
 
-            response.setStatus(HttpStatus.GONE.value());
-            return false;
+           // response.setStatus(HttpStatus.GONE.value());
+            //return false;
         }
 
         return true;
