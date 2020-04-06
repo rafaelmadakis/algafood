@@ -49,6 +49,7 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SpringFoxConfig implements WebMvcConfigurer {
 
+    /*
     @Bean
     public Docket apiDocketV1() {
         var typeResolver = new TypeResolver();
@@ -125,6 +126,8 @@ public class SpringFoxConfig implements WebMvcConfigurer {
                         new Tag("Estatísticas", "Estatísticas da AlgaFood"),
                         new Tag("Permissões", "Gerencia as permissões"));
     }
+
+     */
 
     @Bean
     public Docket apiDocketV2() {
@@ -217,14 +220,19 @@ public class SpringFoxConfig implements WebMvcConfigurer {
         );
     }
 
+    /*
     private ApiInfo apiInfoV1() {
         return new ApiInfoBuilder()
-                .title("AlgaFood API")
-                .description("API aberta para clientes e restaurantes")
+                .title("AlgaFood API (Depreciada)")
+                .description("API aberta para clientes e restaurantes. <br>"
+                + "<strong> Essa versão da API está depreciada e deixara de existir a partir de 19/10/2021"
+                + " Use a versão mais atual da API")
                 .version("1")
                 .contact(new Contact("AlgaWorks", "https://www.algaworks.com", "contato@algaworks.com"))
                 .build();
     }
+
+     */
 
     private ApiInfo apiInfoV2() {
         return new ApiInfoBuilder()
