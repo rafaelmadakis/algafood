@@ -11,7 +11,8 @@ public enum ProblemType {
     MENSAGEM_INCOMPREENCIVEL("/mensagem-incompreencivel", "Mensagem incompreencível"),
     RECURSO_NAO_ENCONTRAO("/recurso-nao-encontrado", "Recurso não encontrado"),
     EMTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
-    ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio");
+    ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio"),
+    ACESSO_NEGADO("/acesso-negado", "Acesso negado");
 
 
     private String title;

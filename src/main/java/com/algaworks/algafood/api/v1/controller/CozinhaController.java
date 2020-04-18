@@ -1,16 +1,15 @@
 package com.algaworks.algafood.api.v1.controller;
 
+import com.algaworks.algafood.api.openapi.controller.CozinhaControllerApi;
 import com.algaworks.algafood.api.v1.assembler.CozinhaInputDisassembler;
 import com.algaworks.algafood.api.v1.assembler.CozinhaModelAssembler;
 import com.algaworks.algafood.api.v1.model.CozinhaModel;
 import com.algaworks.algafood.api.v1.model.input.CozinhaInput;
-import com.algaworks.algafood.api.openapi.controller.CozinhaControllerApi;
+import com.algaworks.algafood.core.security.CheckSecurity;
 import com.algaworks.algafood.domain.model.Cozinha;
 import com.algaworks.algafood.domain.repository.CozinhaRepository;
 import com.algaworks.algafood.domain.service.CadastroCozinhaService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,9 +46,13 @@ public class CozinhaController implements CozinhaControllerApi {
 
     /**
      * Paginação com hyperMidia(Hatoas)
+     *
      * @param pegeable
      * @return
      */
+//    @PreAuthorize("isAuthenticated()")
+//    @PodeConsultarCozinhas
+    @CheckSecurity.Cozinhas.PodeConsultar
     @Override
     @GetMapping
     public PagedModel<CozinhaModel> listar(@PageableDefault(size = 10) Pageable pegeable) {
@@ -67,6 +70,9 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhasPagedModel;
     }
 
+    //    @PreAuthorize("isAuthenticated()")
+//    @PodeConsultarCozinhas
+    @CheckSecurity.Cozinhas.PodeConsultar
     @Override
     @GetMapping("/{cozinhaId}")
     public CozinhaModel buscar(@PathVariable Long cozinhaId) {
@@ -75,6 +81,9 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhaModelAssembler.toModel(cozinha);
     }
 
+    //    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
+//    @PodeEditarCozinhas
+    @CheckSecurity.Cozinhas.PodeEditar
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -85,6 +94,9 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhaModelAssembler.toModel(cozinha);
     }
 
+    //    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
+//    @PodeEditarCozinhas
+    @CheckSecurity.Cozinhas.PodeEditar
     @PutMapping("/{cozinhaId}")
     public CozinhaModel atualizar(@PathVariable Long cozinhaId,
                                   @RequestBody @Valid CozinhaInput cozinhaInput) {
@@ -95,6 +107,9 @@ public class CozinhaController implements CozinhaControllerApi {
         return cozinhaModelAssembler.toModel(cozinhaAtual);
     }
 
+    //    @PreAuthorize("hasAuthority('EDITAR_COZINHAS')")
+//    @PodeEditarCozinhas
+    @CheckSecurity.Cozinhas.PodeEditar
     @Override
     @DeleteMapping("/{cozinhaId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
