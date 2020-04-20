@@ -78,6 +78,7 @@ public class PedidoController implements PedidoControllerOpenApi {
 //        return pedidosWrapper;
 //    }
 
+    @CheckSecurity.Pedidos.PodePesquisar
     @Override
     @GetMapping
     public PagedModel<PedidoResumoModel> pesquisar(PedidoFilter filtro,
