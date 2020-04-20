@@ -75,7 +75,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
     }
 
 
-
+    @CheckSecurity.Restaurantes.PodeConsultar
     @Override
     @GetMapping("/{produtoId}")
     public ProdutoModel buscar(@PathVariable Long restauranteId, @PathVariable Long produtoId) {
@@ -85,7 +85,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
     }
 
 
-    @CheckSecurity.Restaurantes.PodeEditar
+    @CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -102,7 +102,7 @@ public class RestauranteProdutoController implements RestauranteProdutoControlle
     }
 
 
-    @CheckSecurity.Restaurantes.PodeEditar
+    @CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
     @Override
     @PutMapping("/{produtoId}")
     public ProdutoModel atualizar(@PathVariable Long restauranteId, @PathVariable Long produtoId,
