@@ -2,6 +2,7 @@ package com.algaworks.algafood.api.v1.controller;
 
 import java.util.List;
 
+import com.algaworks.algafood.core.security.CheckSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
@@ -25,6 +26,8 @@ public class PermissaoController implements PermissaoControllerOpenApi {
     @Autowired
     private PermissaoModelAssembler permissaoModelAssembler;
 
+
+    @CheckSecurity.UsuarioGruposPermissoes.PodeConsultar
     @Override
     @GetMapping
     public CollectionModel<PermissaoModel> listar() {
