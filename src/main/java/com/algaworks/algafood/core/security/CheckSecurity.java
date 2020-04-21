@@ -96,7 +96,7 @@ public @interface CheckSecurity {
         public @interface PodeEditar {
         }
 
-        @PreAuthorize("hasAuthority(SCOPE_READ) and isAuthenticated()")
+        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         public @interface PodeConsultar {
