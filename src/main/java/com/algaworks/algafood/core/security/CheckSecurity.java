@@ -67,14 +67,14 @@ public @interface CheckSecurity {
                 + "@algaSecurity.gerenciaRestaurantes(#filtro.restauranteId))")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
-        public @interface  PodePesquisar {
+        public @interface PodePesquisar {
         }
 
 
         @PreAuthorize("hasAuthority('SCOPE_WRITE') and isAuthenticated()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
-        public @interface PodeCriar{
+        public @interface PodeCriar {
         }
 
 
@@ -82,11 +82,28 @@ public @interface CheckSecurity {
                 + "@algaSecurity.gerenciaRestauranteDoPedido(#codigoPedido))")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
-        public @interface PodeGerenciarPedidos{
+        public @interface PodeGerenciarPedidos {
         }
 
     }
 
+
+    public @interface FormasPagamento {
+
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDITAR_FORMAS_PAGAMENTO')")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        public @interface PodeEditar {
+        }
+
+        @PreAuthorize("hasAuthority(SCOPE_READ) and isAuthenticated()")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        public @interface PodeConsultar {
+        }
+
+
+    }
 
 
 }
