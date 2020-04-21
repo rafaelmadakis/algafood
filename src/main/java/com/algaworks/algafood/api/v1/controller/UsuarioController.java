@@ -53,7 +53,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return usuarioModelAssembler.toModel(usuario);
     }
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeEditar
+//    @CheckSecurity.UsuarioGruposPermissoes.PodeEditar
     @Override
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
