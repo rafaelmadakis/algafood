@@ -226,7 +226,7 @@ public class AlgaLinks {
                 .listar(restauranteId)).withRel(rel);
     }
 
-    public Link linkToResponsaveisRestaurante(Long restauranteId) {
+    public Link linkToResponsaveisRestaurantes(Long restauranteId) {
         return linkToRestauranteResponsaveis(restauranteId, IanaLinkRelations.SELF.value());
     }
 

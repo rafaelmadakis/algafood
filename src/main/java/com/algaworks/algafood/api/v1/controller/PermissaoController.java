@@ -27,7 +27,7 @@ public class PermissaoController implements PermissaoControllerOpenApi {
     private PermissaoModelAssembler permissaoModelAssembler;
 
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeConsultar
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @Override
     @GetMapping
     public CollectionModel<PermissaoModel> listar() {

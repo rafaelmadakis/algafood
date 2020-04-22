@@ -35,7 +35,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
     @Autowired
     private UsuarioInputDisassembler usuarioInputDisassembler;
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeConsultar
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @Override
     @GetMapping
     public CollectionModel<UsuarioModel> listar() {
@@ -44,7 +44,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return usuarioModelAssembler.toCollectionModel(todasUsuarios);
     }
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeConsultar
+    @CheckSecurity.UsuariosGruposPermissoes.PodeConsultar
     @Override
     @GetMapping("/{usuarioId}")
     public UsuarioModel buscar(@PathVariable Long usuarioId) {
@@ -64,7 +64,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return usuarioModelAssembler.toModel(usuario);
     }
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeAlterarUsuario
+    @CheckSecurity.UsuariosGruposPermissoes.PodeAlterarUsuario
     @Override
     @PutMapping("/{usuarioId}")
     public UsuarioModel atualizar(@PathVariable Long usuarioId,
@@ -76,7 +76,7 @@ public class UsuarioController implements UsuarioControllerOpenApi {
         return usuarioModelAssembler.toModel(usuarioAtual);
     }
 
-    @CheckSecurity.UsuarioGruposPermissoes.PodeAlterarPropriaSenha
+    @CheckSecurity.UsuariosGruposPermissoes.PodeAlterarPropriaSenha
     @Override
     @PutMapping("/{usuarioId}/senha")
     @ResponseStatus(HttpStatus.NO_CONTENT)

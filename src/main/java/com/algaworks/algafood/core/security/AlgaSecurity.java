@@ -3,7 +3,6 @@ package com.algaworks.algafood.core.security;
 import com.algaworks.algafood.domain.repository.PedidoRepository;
 import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -28,7 +27,7 @@ public class AlgaSecurity {
         return jwt.getClaim("usuario_id");
     }
 
-    public boolean gerenciaRestaurantes(Long restauranteId) {
+    public boolean gerenciaRestaurante(Long restauranteId) {
        if (restauranteId == null) {
            return false;
        }
@@ -56,6 +55,68 @@ public class AlgaSecurity {
 //                + "@algaSecurity.gerenciaRestauranteDoPedido(#codigoPedido))")
         return hasAuthority("SCOPE_WRITE") && (hasAuthority("GERENCIAR_PEDIDO")
                 || gerenciaRestauranteDoPedido(codigoPedido));
+    }
+
+    public boolean isAutenticado() {
+        return getAuthentication().isAuthenticated();
+    }
+
+    public boolean temEscopoEscrita() {
+        return hasAuthority("SCOPE_WRITE");
+    }
+
+    public boolean temEscopoLeitura() {
+        return hasAuthority("SCOPE_READ");
+    }
+
+    public boolean podeConsultarRestaurantes() {
+        return  temEscopoLeitura() && isAutenticado();
+    }
+
+    public  boolean podeGerenciarCadastroRestaurantes() {
+        return temEscopoEscrita() && hasAuthority("EDITAR_RESTAURANTES");
+    }
+
+    public  boolean podeGerenciarFuncionamentoRestaurantes(Long restauranteId) {
+        return temEscopoEscrita() && (hasAuthority("EDITAR_RESTAURANTES")
+            || gerenciaRestaurante(restauranteId));
+    }
+
+    public boolean podeConsultarUsuariosGruposPermissoes() {
+        return temEscopoEscrita() && hasAuthority("CONSULTAR_USUARIOS_GRUPOS_PERMISSOES");
+    }
+
+    public boolean podeEditarUsuariosGrupoPermissao() {
+        return temEscopoLeitura() && hasAuthority("EDITAR_USUARIOS_GRUPOS_PERMISSOES");
+    }
+
+    public boolean podePesquisarPedidos(Long clienteId, Long restauranteId) {
+        return temEscopoEscrita() && (hasAuthority("CONSULTAR_PEDIDOS")
+           || usuarioAutenticadoIgual(clienteId) || gerenciaRestaurante(restauranteId));
+    }
+
+    public boolean podePesquisarPedidos() {
+        return isAutenticado() && temEscopoLeitura();
+    }
+
+    public boolean podeConsultarFormasPagamento() {
+        return isAutenticado() && temEscopoLeitura();
+    }
+
+    public boolean podeConsultarCidades() {
+        return isAutenticado() && temEscopoLeitura();
+    }
+
+    public boolean podeConsultarEstados() {
+        return isAutenticado() && temEscopoLeitura();
+    }
+
+    public boolean podeConsultarCozinhas() {
+        return isAutenticado() && temEscopoLeitura();
+    }
+
+    public boolean podeConsultarEstatisticas() {
+        return temEscopoLeitura() && hasAuthority("GERA_RELATORIOS");
     }
 
 }
