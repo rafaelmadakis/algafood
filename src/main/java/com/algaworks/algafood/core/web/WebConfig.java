@@ -21,13 +21,13 @@ public class WebConfig  implements WebMvcConfigurer {
      * Habililtar CORS Globalmente
      * @param registry
      */
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-        //.allowedMethods("GET", "HEAD", "POST")
-          .allowedMethods("*");
-//                .maxAge(30);
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//        //.allowedMethods("GET", "HEAD", "POST")
+//          .allowedMethods("*");
+////                .maxAge(30);
+//    }
 
 //    @Override
 //    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
