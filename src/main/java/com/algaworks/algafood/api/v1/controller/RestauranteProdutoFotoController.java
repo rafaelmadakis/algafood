@@ -44,6 +44,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     private FotoStorageService fotoStorage;
 
     @CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
+    @Override
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public FotoProdutoModel atualizarFoto(@PathVariable Long restauranteId,
                                           @PathVariable Long produtoId,
@@ -66,6 +67,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     }
 
     @CheckSecurity.Restaurantes.PodeGerenciarFuncionamento
+    @Override
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long restauranteId,
@@ -74,6 +76,7 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     }
 
     @CheckSecurity.Restaurantes.PodeConsultar
+    @Override
     @GetMapping
     public FotoProdutoModel buscar(@PathVariable Long restauranteId,
                                    @PathVariable Long produtoId) {
@@ -83,6 +86,8 @@ public class RestauranteProdutoFotoController implements RestauranteProdutoFotoC
     }
 
 
+    //AS fotos dos produtos ficarão públicas (não precisa de autorização para acessá-las)
+    @Override
     @GetMapping(produces = MediaType.ALL_VALUE)
     public ResponseEntity<?> servir(@PathVariable Long restauranteId,
                                                       @PathVariable Long produtoId
