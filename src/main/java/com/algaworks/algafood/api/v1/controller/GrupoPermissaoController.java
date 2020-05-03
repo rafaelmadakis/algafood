@@ -43,7 +43,7 @@ public class GrupoPermissaoController implements GrupoPermissaoControllerOpenApi
 
         permissoesModel.add(algaLinks.linkToGrupoPermissoes(grupoId));
 
-        if (algaSecurity.podeEditarUsuariosGrupoPermissao()) {
+        if (algaSecurity.podeEditarUsuariosGruposPermissoes()) {
             permissoesModel.add(algaLinks.linkToGrupoPermissaoAssociacao(grupoId, "associar"));
 
             permissoesModel.getContent().forEach(permissaoModel -> {

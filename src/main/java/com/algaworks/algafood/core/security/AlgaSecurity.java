@@ -1,12 +1,13 @@
 package com.algaworks.algafood.core.security;
 
-import com.algaworks.algafood.domain.repository.PedidoRepository;
-import com.algaworks.algafood.domain.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
+
+import com.algaworks.algafood.domain.repository.PedidoRepository;
+import com.algaworks.algafood.domain.repository.RestauranteRepository;
 
 @Component
 public class AlgaSecurity {
@@ -17,29 +18,33 @@ public class AlgaSecurity {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-    public Authentication getAuthentication(){
+    public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public Long getUsuarioId(){
+    public boolean isAutenticado() {
+        return getAuthentication().isAuthenticated();
+    }
+
+    public Long getUsuarioId() {
         Jwt jwt = (Jwt) getAuthentication().getPrincipal();
 
         return jwt.getClaim("usuario_id");
     }
 
     public boolean gerenciaRestaurante(Long restauranteId) {
-       if (restauranteId == null) {
-           return false;
-       }
+        if (restauranteId == null) {
+            return false;
+        }
 
-        return  restauranteRepository.existsResponsavel(restauranteId, getUsuarioId());
+        return restauranteRepository.existsResponsavel(restauranteId, getUsuarioId());
     }
 
     public boolean gerenciaRestauranteDoPedido(String codigoPedido) {
         return pedidoRepository.isPedidoGerenciadoPor(codigoPedido, getUsuarioId());
     }
 
-    public boolean usuarioAutenticadoIgual(Long usuarioId){
+    public boolean usuarioAutenticadoIgual(Long usuarioId) {
         return getUsuarioId() != null && usuarioId != null
                 && getUsuarioId().equals(usuarioId);
     }
@@ -47,18 +52,6 @@ public class AlgaSecurity {
     public boolean hasAuthority(String authorityName) {
         return getAuthentication().getAuthorities().stream()
                 .anyMatch(authority -> authority.getAuthority().equals(authorityName));
-    }
-
-    public  boolean podeGerenciarPedidos(String codigoPedido) {
-
-//        @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('GERENCIAR_PEDIDOS') or "
-//                + "@algaSecurity.gerenciaRestauranteDoPedido(#codigoPedido))")
-        return hasAuthority("SCOPE_WRITE") && (hasAuthority("GERENCIAR_PEDIDO")
-                || gerenciaRestauranteDoPedido(codigoPedido));
-    }
-
-    public boolean isAutenticado() {
-        return getAuthentication().isAuthenticated();
     }
 
     public boolean temEscopoEscrita() {
@@ -69,30 +62,35 @@ public class AlgaSecurity {
         return hasAuthority("SCOPE_READ");
     }
 
-    public boolean podeConsultarRestaurantes() {
-        return  temEscopoLeitura() && isAutenticado();
+    public boolean podeGerenciarPedidos(String codigoPedido) {
+        return temEscopoEscrita() && (hasAuthority("GERENCIAR_PEDIDOS")
+                || gerenciaRestauranteDoPedido(codigoPedido));
     }
 
-    public  boolean podeGerenciarCadastroRestaurantes() {
+    public boolean podeConsultarRestaurantes() {
+        return temEscopoLeitura() && isAutenticado();
+    }
+
+    public boolean podeGerenciarCadastroRestaurantes() {
         return temEscopoEscrita() && hasAuthority("EDITAR_RESTAURANTES");
     }
 
-    public  boolean podeGerenciarFuncionamentoRestaurantes(Long restauranteId) {
+    public boolean podeGerenciarFuncionamentoRestaurantes(Long restauranteId) {
         return temEscopoEscrita() && (hasAuthority("EDITAR_RESTAURANTES")
-            || gerenciaRestaurante(restauranteId));
+                || gerenciaRestaurante(restauranteId));
     }
 
     public boolean podeConsultarUsuariosGruposPermissoes() {
-        return temEscopoEscrita() && hasAuthority("CONSULTAR_USUARIOS_GRUPOS_PERMISSOES");
+        return temEscopoLeitura() && hasAuthority("CONSULTAR_USUARIOS_GRUPOS_PERMISSOES");
     }
 
-    public boolean podeEditarUsuariosGrupoPermissao() {
-        return temEscopoLeitura() && hasAuthority("EDITAR_USUARIOS_GRUPOS_PERMISSOES");
+    public boolean podeEditarUsuariosGruposPermissoes() {
+        return temEscopoEscrita() && hasAuthority("EDITAR_USUARIOS_GRUPOS_PERMISSOES");
     }
 
     public boolean podePesquisarPedidos(Long clienteId, Long restauranteId) {
-        return temEscopoEscrita() && (hasAuthority("CONSULTAR_PEDIDOS")
-           || usuarioAutenticadoIgual(clienteId) || gerenciaRestaurante(restauranteId));
+        return temEscopoLeitura() && (hasAuthority("CONSULTAR_PEDIDOS")
+                || usuarioAutenticadoIgual(clienteId) || gerenciaRestaurante(restauranteId));
     }
 
     public boolean podePesquisarPedidos() {
@@ -116,7 +114,7 @@ public class AlgaSecurity {
     }
 
     public boolean podeConsultarEstatisticas() {
-        return temEscopoLeitura() && hasAuthority("GERA_RELATORIOS");
+        return temEscopoLeitura() && hasAuthority("GERAR_RELATORIOS");
     }
 
 }

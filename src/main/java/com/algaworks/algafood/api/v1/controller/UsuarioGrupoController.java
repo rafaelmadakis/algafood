@@ -40,7 +40,7 @@ public class UsuarioGrupoController implements UsuarioGrupoControllerOpenApi {
         CollectionModel<GrupoModel> gruposModel = grupoModelAssembler.toCollectionModel(usuario.getGrupos())
                 .removeLinks();
 
-        if (algaSecurity.podeEditarUsuariosGrupoPermissao()) {
+        if (algaSecurity.podeEditarUsuariosGruposPermissoes()) {
             gruposModel.add(algaLinks.linkToUsuarioGrupoAssociacao(usuarioId, "associar"));
 
 
